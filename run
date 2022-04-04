@@ -1,9 +1,0 @@
-#!bin/bash
-
-fuser -k 8080/tcp
-
-if [ $1 == "-X" ]; then
-	./mvnw spring-boot:run -X
-else
-	./mvnw spring-boot:run
-fi

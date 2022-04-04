@@ -1,10 +1,10 @@
-package xyz.activetime.app;
+package xyz.fimbi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class FimbiApplicationTests {
 
 	@Test
 	void contextLoads() {
