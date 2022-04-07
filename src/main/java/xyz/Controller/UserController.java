@@ -2,6 +2,7 @@ package xyz.Controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,5 +27,11 @@ public class UserController {
 			throws Exception {
 		User newUser = userService.createUser(userDto, guildId);
 		return new ResponseEntity<>(newUser, HttpStatus.OK);
+	}
+
+	@GetMapping
+	public ResponseEntity<UserDto> getById(@RequestParam Long userId) {
+		User user = userService.findById(userId);
+		return new ResponseEntity<>(new UserDto(user), HttpStatus.OK);
 	}
 }

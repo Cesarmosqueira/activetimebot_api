@@ -23,7 +23,7 @@ public class UserService {
 	private GuildRepository guildRepository;
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-	public User createUser(UserDto userDto, Long guildId) throws Exception {
+	public User createUser(UserDto userDto, Long guildId) {
 		// Check guild id
 		if (guildRepository.existsById(guildId)) {
 			// checks if there are 0 repetitions of that relation
@@ -32,15 +32,19 @@ public class UserService {
 				// there is no way to validate if the user id is correct from the server side.
 				userxGuildRepository.save(relation);
 				// relation is saved and we save the user
-				return userRepository.save(new User(userDto, guildId));
+				return userRepository.save(new User(userDto));
 			} else {
-				throw new Exception("This user is already registered on that server");
+				return null;
 			}
 		} else {
-			throw new Exception("Guild doesn't exist");
+			return null;
 		}
-		//
 	}
 	// TODO rest of crud
+
+	public User findById(Long userId) {
+		User user = userRepository.getById(userId);
+		return user;
+	}
 
 }

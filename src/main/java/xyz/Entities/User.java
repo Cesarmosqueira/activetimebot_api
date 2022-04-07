@@ -18,18 +18,14 @@ public class User {
 	@Column(name = "userId")
 	private Long id;
 
-	@Column(name = "guildId")
-	private Long guildId;
-
 	@Column(name = "userName")
 	private String userName;
 
 	@Column(name = "minutesActive")
 	private Long minutesActive;
 
-	public User(UserDto userDto, Long guildId) {
+	public User(UserDto userDto) {
 		this.id = userDto.getId();
-		this.guildId = guildId;
 		this.userName = userDto.getUserName();
 		this.minutesActive = userDto.getMinutesActive();
 	}
