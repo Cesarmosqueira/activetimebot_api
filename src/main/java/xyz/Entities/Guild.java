@@ -16,7 +16,4 @@ public class Guild {
 	@Id
 	@Column(name = "id")
 	private Long id;
-
-	@Column(name = "name", length = 32)
-	private String name;
 }
