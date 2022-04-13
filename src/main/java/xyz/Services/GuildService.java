@@ -10,11 +10,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import xyz.Entities.Guild;
 import xyz.Repositories.GuildRepository;
+import xyz.Repositories.UserxGuildRepository;
 
+@Transactional
 @Service
 public class GuildService {
 	@Autowired
 	private GuildRepository guildRepository;
+
+	@Autowired
+	private UserxGuildRepository userxGuildRepository;
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	public Guild createGuild(Guild guild) {
@@ -35,5 +40,24 @@ public class GuildService {
 			}
 		}
 		return String.format("Updated(%d) created(%d)", updated, created);
+	}
+
+	public List<Long> getUserIdsByGuildId(Long guildId) {
+		return userxGuildRepository.users_in_guild(guildId);
+	}
+
+	public int updateActiveUsers(Long guildId, List<Long> activeUsersId) {
+		int updated = 0;
+		for (Long userId : activeUsersId) {
+			userxGuildRepository.increment_active_minute(guildId, userId);
+			updated += 1;
+		}
+		return updated;
+	}
+
+	public int clearMinutes(Long guildId) {
+		int totalMinutes = userxGuildRepository.minutes_sum(guildId);
+		userxGuildRepository.clear_minutes(guildId);
+		return totalMinutes;
 	}
 }

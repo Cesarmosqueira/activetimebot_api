@@ -1,5 +1,8 @@
 package xyz.Services;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -40,11 +43,22 @@ public class UserService {
 			return null;
 		}
 	}
+
 	// TODO rest of crud
+	// user list by guild id
+	// update user time actie:
+	//
 
 	public User findById(Long userId) {
 		User user = userRepository.getById(userId);
 		return user;
 	}
 
+	public List<User> findAll() {
+		return userRepository.findAll();
+	}
+
+	public List<User> convertIds(List<Long> userIds) {
+		return userIds.stream().map(this::findById).collect(Collectors.toList());
+	}
 }

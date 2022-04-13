@@ -1,5 +1,6 @@
 package xyz.Entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -19,8 +20,12 @@ public class UserxGuild {
 	@Id
 	private Long userId;
 
+	@Column(name = "minutes")
+	private Long minutes;
+
 	public UserxGuild(Long guildId, Long userId) {
 		this.guildId = guildId;
 		this.userId = userId;
+		this.minutes = Long.valueOf(0);
 	}
 }

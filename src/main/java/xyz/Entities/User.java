@@ -21,12 +21,9 @@ public class User {
 	@Column(name = "userName")
 	private String userName;
 
-	@Column(name = "minutesActive")
-	private Long minutesActive;
-
 	public User(UserDto userDto) {
 		this.id = userDto.getId();
 		this.userName = userDto.getUserName();
-		this.minutesActive = userDto.getMinutesActive();
+
 	}
 }

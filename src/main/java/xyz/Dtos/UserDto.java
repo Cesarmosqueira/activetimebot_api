@@ -11,11 +11,9 @@ import xyz.Entities.User;
 public class UserDto {
 	private Long id;
 	private String userName;
-	private Long minutesActive;
 
 	public UserDto(User user) {
 		this.id = user.getId();
 		this.userName = user.getUserName();
-		this.minutesActive = user.getMinutesActive();
 	}
 }
