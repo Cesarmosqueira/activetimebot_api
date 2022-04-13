@@ -44,11 +44,6 @@ public class UserService {
 		}
 	}
 
-	// TODO rest of crud
-	// user list by guild id
-	// update user time actie:
-	//
-
 	public User findById(Long userId) {
 		User user = userRepository.getById(userId);
 		return user;
